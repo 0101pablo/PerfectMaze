@@ -9,22 +9,13 @@ public class Positions : MonoBehaviour {
     public GameObject finish;
     public int finishXPos = 29;
     public int finishYPos = -10;
-    public GameObject sAgent;
-    public GameObject nAgent;
-    public bool smallAgent = false;
+    public GameObject Agent;
 
-	// Use this for initialization
-	void Start () {
-
+    // Use this for initialization
+    void Start(){
         Instantiate(finish, new Vector3(finishXPos, 0f, finishYPos), Quaternion.identity);
-
-        if (smallAgent) {
-            Instantiate(sAgent, new Vector3(startXPos + 0.5f,0.0f,startYPos + 0.5f),Quaternion.identity);
-        }
-        else{
-            Instantiate(nAgent, new Vector3(startXPos + 1f,0f,startYPos + 0f), Quaternion.identity);
-        }
-	}
+        Instantiate(Agent, new Vector3(startXPos + 0.5f, 0.0f, startYPos + 0.5f), Agent.transform.rotation);
+    }   
 	
 	// Update is called once per frame
 	void Update () {

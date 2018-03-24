@@ -2,68 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Agent : MonoBehaviour
-{
-
+public class Agent : MonoBehaviour{
     public int speed = 10;
-    public int rotateSpeed = 1000;
+    public int rotateSpeed = 10;
+    private bool trigControl;
 
-    public GameObject nSensor;
-    public GameObject eSensor;
-    public GameObject wSensor;
-    public bool n = false;
-    public bool e = false;
-    public bool w = false;
-
-    int direction = 0; //0=N, 1=E, 2=S, 3=W
-
-    private void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        ScanTriggers();
-
-        if (n){
-            if (e){
-                transform.Rotate(Vector3.up * -90);
-                ScanTriggers();
-            }
-            else{
-                transform.Rotate(Vector3.up * 90);
-                ScanTriggers();
-            }
-        }
-        else
-        {
-            if (e){
-                transform.position += transform.forward * 2;
-                ScanTriggers();
-            }
-            else{
-                transform.Rotate(Vector3.up * 90);
-                transform.position += transform.forward * 2;
-                ScanTriggers();
-            }
-        }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            //transform.localPosition += Vector3.forward;
-            transform.position += transform.forward;
+    void Update(){
+        if (trigControl){
+            transform.Rotate(Vector3.up * -rotateSpeed * 10 * Time.deltaTime);
+            transform.position += -transform.right * speed / 10 * Time.deltaTime;        }
+        else{
+            transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+            transform.position += transform.forward * speed * Time.deltaTime;
         }
     }
 
-    void ScanTriggers()
-    {
-        if (ChildsTrigger.nChild) n = true;
-        if (!ChildsTrigger.nChild) n = false;
-        if (ChildsTrigger.eChild) e = true;
-        if (!ChildsTrigger.eChild) e = false;
-        if (ChildsTrigger.wChild) w = true;
-        if (!ChildsTrigger.wChild) w = false;
+    private void OnTriggerEnter(Collider other){
+        trigControl = true;
+    }
+
+    private void OnTriggerExit(Collider other){
+        trigControl = false;
     }
 }
