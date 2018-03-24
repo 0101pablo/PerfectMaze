@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Positions : MonoBehaviour {
 
-    public int startXPos = -10;
-    public int startYPos = 28;
-    public GameObject finish;
-    public int finishXPos = 29;
-    public int finishYPos = -10;
     public GameObject Agent;
+    public int startXPos = -5;
+    public int startZPos = 13;
+    
+    /*public GameObject Finish;
+    public int finishXPos = 10;
+    public int finishZPos = -28;*/
 
-    // Use this for initialization
     void Start(){
-        Instantiate(finish, new Vector3(finishXPos, 0f, finishYPos), Quaternion.identity);
-        Instantiate(Agent, new Vector3(startXPos + 0.5f, 0.0f, startYPos + 0.5f), Agent.transform.rotation);
+
+        //Instantiate(finish, new Vector3(finishXPos, 0f, finishZPos), Quaternion.identity);
+
+        Instantiate(Agent, new Vector3(startXPos + 0.5f, 0.0f, startZPos + 0.5f), Agent.transform.rotation);
     }   
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
